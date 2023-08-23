@@ -1,0 +1,4 @@
+repository: https://argoproj.github.io/argo-helm
+chart: home-assistant
+version: '*'
+namespace: home-assistant

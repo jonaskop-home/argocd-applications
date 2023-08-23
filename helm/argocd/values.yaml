@@ -1,0 +1,83 @@
+configs:
+  credentialTemplates:
+    github-jonas:
+      url: https://github.com/JonasKop
+      username: "{{ githubUsername }}"
+      password: "{{ githubPassword }}"
+    github-jonas-home:
+      url: https://github.com/jonaskop-home
+      username: "{{ githubUsername }}"
+      password: "{{ githubPassword }}"
+  cm:
+    timeout.reconciliation: 10s
+
+dex:
+  enabled: false
+
+repoServer:
+  env:
+    - name: STORE_KIND
+      value: ClusterSecretStore
+    - name: STORE_NAME
+      value: gcp-store
+    - name: REFRESH_INTERVAL
+      value: "0"
+  # extraArgs: ["--loglevel", "debug"]
+  initContainers:
+    - name: helm-wrapper
+      image: alpine:3.18.3
+      imagePullPolicy: IfNotPresent
+      command:
+        - sh
+        - -c
+        - |
+          # Download external-secrets-transformer
+          wget https://github.com/JonasKop/external-secrets-transformer/releases/download/0.4.0/external-secrets-transformer-amd64
+          install -m 0755 external-secrets-transformer-amd64 /custom-tools/external-secrets-transformer
+
+          # Create wrapper script for helm
+          cat <<'EOF' > /custom-tools/helm
+          #!/bin/bash
+          exec /usr/local/bin/helm-real "$@" $([ "$1" == "template" ] && echo "--post-renderer external-secrets-transformer")
+          EOF
+          chmod 0755 /custom-tools/helm
+
+          # Download real helm
+          wget https://get.helm.sh/helm-v3.12.1-linux-amd64.tar.gz
+          tar -xvf helm-v3.12.1-linux-amd64.tar.gz
+          mv linux-amd64/helm /custom-tools/helm-real
+
+          # Create wrapper script for helm
+          cat <<'EOF' > /custom-tools/kustomize
+          #!/bin/bash
+          exec /usr/local/bin/kustomize-real "$@" | $([ "$1" == "build" ] && echo "external-secrets-transformer")
+          EOF
+          chmod 0755 /custom-tools/kustomize
+
+          # Download real kustomize
+          wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.1.0/kustomize_v5.1.0_linux_amd64.tar.gz
+          tar -xvf kustomize_v5.1.0_linux_amd64.tar.gz
+          mv kustomize /custom-tools/kustomize-real
+
+      volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+  volumes:
+    - name: custom-tools
+      emptyDir: {}
+  volumeMounts:
+    - mountPath: /usr/local/bin/external-secrets-transformer
+      subPath: external-secrets-transformer
+      name: custom-tools
+    - mountPath: /usr/local/bin/helm-real
+      subPath: helm-real
+      name: custom-tools
+    - mountPath: /usr/local/bin/helm
+      subPath: helm
+      name: custom-tools
+    - mountPath: /usr/local/bin/kustomize-real
+      subPath: kustomize-real
+      name: custom-tools
+    - mountPath: /usr/local/bin/kustomize
+      subPath: kustomize
+      name: custom-tools
