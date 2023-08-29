@@ -12,6 +12,6 @@ patches:
 secretGenerator:
   - name: gcp-service-account
     literals:
-      - secret-access-credentials={{ externalSecretsServiceAccount }}
+      - secret-access-credentials={{ .externalSecretsServiceAccount }}
     options:
       disableNameSuffixHash: true
