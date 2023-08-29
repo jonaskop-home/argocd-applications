@@ -2,12 +2,12 @@ configs:
   credentialTemplates:
     github-jonas:
       url: https://github.com/JonasKop
-      username: "{{ githubUsername }}"
-      password: "{{ githubPassword }}"
+      username: "{{ .githubUsername }}"
+      password: "{{ .githubPassword }}"
     github-jonas-home:
       url: https://github.com/jonaskop-home
-      username: "{{ githubUsername }}"
-      password: "{{ githubPassword }}"
+      username: "{{ .githubUsername }}"
+      password: "{{ .githubPassword }}"
   cm:
     timeout.reconciliation: 10s
 
@@ -32,7 +32,7 @@ repoServer:
         - -c
         - |
           # Download external-secrets-transformer
-          wget https://github.com/JonasKop/external-secrets-transformer/releases/download/0.4.0/external-secrets-transformer-amd64
+          wget https://github.com/JonasKop/external-secrets-transformer/releases/download/0.5.0/external-secrets-transformer-amd64
           install -m 0755 external-secrets-transformer-amd64 /custom-tools/external-secrets-transformer
 
           # Create wrapper script for helm

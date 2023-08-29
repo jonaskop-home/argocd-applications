@@ -11,5 +11,5 @@ config:
     database: home_assistant
   mosquitto:
     hostname: mosquitto.mosquitto.svc.cluster.local
-    username: "{{ mosquittoUsername }}"
-    password: "{{ mosquittoPassword }}"
+    username: "{{ .mosquittoUsername }}"
+    password: "{{ .mosquittoPassword }}"
