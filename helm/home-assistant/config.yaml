@@ -1,4 +1,4 @@
-repository: https://argoproj.github.io/argo-helm
+repository: ghcr.io/jonaskop-home/helm
 chart: home-assistant
 version: '*'
 namespace: home-assistant
