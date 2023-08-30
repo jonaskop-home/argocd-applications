@@ -13,3 +13,6 @@ config:
     hostname: mosquitto.mosquitto.svc.cluster.local
     username: "{{ .mosquittoUsername }}"
     password: "{{ .mosquittoPassword }}"
+  google:
+    projectId: home-394919
+    serviceAccount: "{{ .homeAssistantServiceAccount }}"
