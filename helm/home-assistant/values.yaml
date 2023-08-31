@@ -13,4 +13,3 @@ config:
   google:
     projectId: home-394919
     serviceAccount: "{{ .homeAssistantServiceAccount }}"
-

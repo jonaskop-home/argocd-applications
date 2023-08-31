@@ -1,0 +1,4 @@
+repository: ghcr.io/jonaskop-home/helm
+chart: mosquitto
+version: '*'
+namespace: mosquitto
