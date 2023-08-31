@@ -1,7 +1,7 @@
 ingress:
   hostname: home-assistant.sjoedin.se
   annotations:
-    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 
 config:
   postgresql:
@@ -9,10 +9,8 @@ config:
     username: "${POSTGRES_USERNAME}" # Will be replaced by envsubst in init container by postgres operator values
     password: "${POSTGRES_PASSWORD}" # Will be replaced by envsubst in init container by postgres operator values
     database: home_assistant
-  mosquitto:
-    hostname: mosquitto.mosquitto.svc.cluster.local
-    username: "{{ .mosquittoUsername }}"
-    password: "{{ .mosquittoPassword }}"
+
   google:
     projectId: home-394919
     serviceAccount: "{{ .homeAssistantServiceAccount }}"
+
