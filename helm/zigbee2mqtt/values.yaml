@@ -1,1 +1,9 @@
 nodeName: worker-a54dc3a2
+
+config:
+  permitJoin: true
+  mqtt:
+    base_topic: zigbee2mqtt
+    server: mqtt://mosquitto.mosquitto.svc.cluster.local
+    username: "{{ .mosquittoUsername }}"
+    password: "{{ .mosquittoPassword }}"
