@@ -7,3 +7,12 @@ config:
     server: mqtt://mosquitto.mosquitto.svc.cluster.local
     username: "{{ .mosquittoUsername }}"
     password: "{{ .mosquittoPassword }}"
+  devices:
+    '0x680ae2fffef9e0e7':
+      friendly_name: Vardagsrumslampa 2
+    '0x680ae2fffe418ddc':
+      friendly_name: Vardagsrumslampa 1
+    '0x680ae2fffe40f104':
+      friendly_name: Allrumslampa
+    '0x680ae2fffeacb0db':
+      friendly_name: Hallampa
