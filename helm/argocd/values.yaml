@@ -48,7 +48,7 @@ repoServer:
         - -c
         - |
           # Download external-secrets-transformer
-          wget https://github.com/JonasKop/external-secrets-transformer/releases/download/0.5.0/external-secrets-transformer-amd64
+          wget https://github.com/jonaskop-home/external-secrets-transformer/releases/download/0.1.0/external-secrets-transformer-amd64
           install -m 0755 external-secrets-transformer-amd64 /custom-tools/external-secrets-transformer
 
           # Create wrapper script for helm
