@@ -16,3 +16,4 @@ config:
       friendly_name: Allrumslampa
     '0x680ae2fffeacb0db':
       friendly_name: Hallampa
+  networkKey: "{{- .zigbeeNetworkKey | nindent 4 }}"
