@@ -11,5 +11,5 @@ config:
     database: home_assistant
 
   google:
-    projectId: home-394919
+    projectId: home-assistant-61673
     serviceAccount: "{{ .homeAssistantServiceAccount }}"
