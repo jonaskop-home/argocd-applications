@@ -1,5 +1,6 @@
 grafana:
   ingress:
+    ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     enabled: true
