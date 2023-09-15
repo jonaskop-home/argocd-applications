@@ -1,0 +1,22 @@
+grafana:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    enabled: true
+    hosts:
+      - "grafana.sjoedin.se"
+    tls:
+      - hosts:
+          - "grafana.sjoedin.se"
+        secretName: grafana-tls
+
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
