@@ -10,6 +10,25 @@ grafana:
       - hosts:
           - "grafana.sjoedin.se"
         secretName: grafana-tls
+  adminPassword: "{{ .grafanaAdminPassword }}"
+  grafana.ini:
+    auth:
+      disable_login_form: "true"
+    auth.google:
+      enabled: true
+      auto_login: false
+      client_id: "{{ .grafanaClientId }}"
+      client_secret: "{{ .grafanaClientSecret }}"
+      scopes: openid email profile
+      auth_url: https://accounts.google.com/o/oauth2/v2/auth
+      token_url: https://oauth2.googleapis.com/token
+      api_url: https://openidconnect.googleapis.com/v1/userinfo
+      use_pkce: true
+      # role_attribute_path: contains(groups[*], 'grafana-admin') && 'Admin' || contains(groups[*], 'grafana-user') && 'Editor' || 'Viewer'
+      # signout_redirect_url: https://grafana.home.jonassjodin.com/login
+    server:
+      root_url: https://grafana.sjoedin.se
+
 
 prometheus:
   prometheusSpec:
