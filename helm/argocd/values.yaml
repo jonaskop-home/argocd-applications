@@ -10,9 +10,15 @@ configs:
       password: "{{ .githubPassword }}"
   cm:
     timeout.reconciliation: 10s
-
-dex:
-  enabled: false
+    dex.config: |
+      connectors:
+      - config:
+          issuer: https://accounts.google.com
+          clientID: $argocd-oidc:clientId
+          clientSecret: $argocd-oidc:clientSecret
+        type: oidc
+        id: google
+        name: Google
 
 server:
   ingress:
