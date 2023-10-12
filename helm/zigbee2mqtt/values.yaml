@@ -16,4 +16,6 @@ config:
       friendly_name: Allrumslampan
     '0x680ae2fffeacb0db':
       friendly_name: Hallampan
+    '0x000b57fffeba1954':
+      friendly_name: Vitrinskåpen
   networkKey: "{{- .zigbeeNetworkKey | nindent 4 }}"
