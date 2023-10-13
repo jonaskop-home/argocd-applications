@@ -1,9 +1,5 @@
 configs:
   credentialTemplates:
-    github-jonas:
-      url: https://github.com/JonasKop
-      username: "{{ .githubUsername }}"
-      password: "{{ .githubPassword }}"
     github-jonas-home:
       url: https://github.com/jonaskop-home
       username: "{{ .githubUsername }}"
